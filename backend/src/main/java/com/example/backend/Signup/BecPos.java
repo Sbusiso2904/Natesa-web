@@ -5,6 +5,4 @@ public enum BecPos {
     SECRETERY,
     DEBUTY_CHAIRPERSON,
     TREASURER
-
-    
 }
