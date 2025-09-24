@@ -1,5 +1,5 @@
 package com.example.backend.Signup;
 
 public enum UserStatus {
-    ACTIVE, INACTIVE, GRADUATED, ON_LEAVE
+    ACTIVE, INACTIVE, GRADUATED, ON_LEAVE,WAITING
 }

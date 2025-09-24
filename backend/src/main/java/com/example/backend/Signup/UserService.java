@@ -11,19 +11,33 @@ public class UserService {
         this.userRespo = userRespo;
     }
 
-    public String registerUser(User user){
+    public User registerUser(User user){
         Optional<User> existingUserByName = userRespo.findByUsername(user.getName());
         if(existingUserByName.isPresent()){
-            return "Username already exists";
+            
         }
         
         Optional<User> existingByEmail = userRespo.findByEmail(user.getEmail());
         if(existingByEmail.isPresent()){
-            return "Email already exists!";
+            System.out.println("Email already exists!") ;
         }
-       
-        saveUser(user);
-        return "User registered successfully";
+        else{
+            if (user.getIsBecMember() == null) {
+                user.setIsBecMember(YesNo.NO); // default value
+            }
+            if (user.getStatus() == null) {
+                user.setStatus(UserStatus.WAITING); // default value
+            }
+            if (user.getRole() == null) {
+                user.setRole("USER"); // default role
+            }
+            // branch_id should be set by the client or handled here
+            if (user.getBranch_id() == 0) {
+                user.setBranch_id(1); // default branch
+            }
+
+        }
+         return saveUser(user);
     }
 
     public String resetPassword(String email, String newPassword) {
